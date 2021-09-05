@@ -1,8 +1,11 @@
 package com.example.screenswitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,7 +18,8 @@ public class Talle3_Ac3 extends AppCompatActivity {
     EditText textPP1, textPP2, textQ, textP1, textP2;
     float PP1, PP2, Q, P1, P2;
     float finalResult;
-    String finalResultText;
+    private ConstraintLayout ConstraintLayout;
+    String finalResultText, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,8 @@ public class Talle3_Ac3 extends AppCompatActivity {
         textP1 = findViewById(R.id.textSpaceP1);
         textP2 = findViewById(R.id.textSpaceP2);
 
+        ConstraintLayout = findViewById(R.id.layout3);
+
         calculateBtn.setOnClickListener(
                 (view) ->
                 {
@@ -36,6 +42,9 @@ public class Talle3_Ac3 extends AppCompatActivity {
                     moveToNextScreen();
                 }
         );
+
+        Intent nameInt = getIntent();
+        name = nameInt.getStringExtra("nameSave");
     }
 
     public void moveToNextScreen()
@@ -59,7 +68,19 @@ public class Talle3_Ac3 extends AppCompatActivity {
 
         Intent switchActivity = new Intent(this, taller3_ac4.class);
         switchActivity.putExtra("nota final", finalResultText);
+        switchActivity.putExtra("nameSaver", name);
+
         startActivity(switchActivity);
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+
+        SharedPreferences data = getSharedPreferences("data", MODE_PRIVATE);
+        String backGround = data.getString("background", "#FFFFFF");
+        ConstraintLayout.setBackgroundColor(Color.parseColor(backGround));
+
     }
 
 }

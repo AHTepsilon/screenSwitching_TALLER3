@@ -1,8 +1,11 @@
 package com.example.screenswitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -14,6 +17,7 @@ public class taller3_ac4 extends AppCompatActivity {
 
     TextView yourGrade, gradeArgument;
     String finalGrade, testString;
+    private ConstraintLayout ConstraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,8 @@ public class taller3_ac4 extends AppCompatActivity {
         returnBtn = findViewById(R.id.returnButton);
         yourGrade = findViewById(R.id.gradeTextView);
         gradeArgument = (TextView)findViewById(R.id.textView8);
+
+        ConstraintLayout = findViewById(R.id.layout4);
 
         testString = "test";
 
@@ -34,7 +40,7 @@ public class taller3_ac4 extends AppCompatActivity {
         );
 
         Intent nameInt = getIntent();
-        String userName = nameInt.getStringExtra("nameSave");
+        String userName = nameInt.getStringExtra("nameSaver");
 
         gradeArgument.setText("Hola, " + userName + ", tu nota es:");
 
@@ -55,5 +61,15 @@ public class taller3_ac4 extends AppCompatActivity {
     {
         Intent switchActivity = new Intent(this, Talle3_Ac2.class);
         startActivity(switchActivity);
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+
+        SharedPreferences data = getSharedPreferences("data", MODE_PRIVATE);
+        String backGround = data.getString("background", "#FFFFFF");
+        ConstraintLayout.setBackgroundColor(Color.parseColor(backGround));
+
     }
 }
