@@ -14,7 +14,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button switchScreenBlue, switchScreenWhite, switchScreenBlack;
-    //private ConstraintLayout ConstraintLayout;
+    private ConstraintLayout ConstraintLayout;
     String whiteColor, blueColor, blackColor;
     View view;
 
@@ -33,19 +33,19 @@ public class MainActivity extends AppCompatActivity {
         switchScreenWhite = findViewById(R.id.whiteButton);
         switchScreenBlack = findViewById(R.id.blackButton);
 
-        //ConstraintLayout = findViewById(R.id.ConstraintLayout);
+        ConstraintLayout = findViewById(R.id.layoutCons);
 
         whiteColor = "#FFFFFF";
         blueColor = "#8881E3";
         blackColor = "#6B6B6B";
 
-        // SharedPreferences data = getSharedPreferences("data", MODE_PRIVATE);
+        SharedPreferences data = getSharedPreferences("data", MODE_PRIVATE);
 
         switchScreenBlue.setOnClickListener(
                 (view)->
                 {
-                    /*data.edit().putString("background", blueColor).apply();
-                    finish();*/
+                    data.edit().putString("background", blueColor).apply();
+                    finish();
                     moveToNextScreen();
                 }
 
@@ -54,16 +54,16 @@ public class MainActivity extends AppCompatActivity {
         switchScreenWhite.setOnClickListener(
                 (view)->
                 {
-                    /*data.edit().putString("background", whiteColor).apply();
-                    finish();*/
+                    data.edit().putString("background", whiteColor).apply();
+                    finish();
                     moveToNextScreen();
                 }
         );
         switchScreenBlack.setOnClickListener(
                 (view)->
                 {
-                    /*data.edit().putString("background", blackColor).apply();
-                    finish();*/
+                    data.edit().putString("background", blackColor).apply();
+                    finish();
                     moveToNextScreen();
                 }
         );
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivity);
     }
 
-   /* protected void onResume()
+    protected void onResume()
     {
         super.onResume();
 
@@ -95,5 +95,5 @@ public class MainActivity extends AppCompatActivity {
         String backGround = data.getString("background", "#FFFFFF");
         ConstraintLayout.setBackgroundColor(Color.parseColor(backGround));
 
-    }*/
+    }
 }
